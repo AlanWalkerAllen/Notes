@@ -1,0 +1,16 @@
+我们常用的判断数据类型的手段就是typeof和instanceof，但两者都有自己的局限性，
+
+instanceof检测的是原型链，假定一个 [] ,从原型链可以看出，[] 的 proto 直接指向Array.prototype，间接指向 Object.prototype，所以按照 instanceof 的判断规则，[] 就是Object的实例。依次类推，类似的 new Date()、new Person() 也会形成一条对应的原型链 。因此，instanceof 只能用来判断两个对象是否属于实例关系， 而不能判断一个对象实例具体属于哪种类型
+
+ES5中新增了一个Array.isArray()方法，可以帮助我们确定是不是数组
+
+假设如果没有给我们提供这样类似的方法，我们有没有办法去写一个通用的方法能判断出我们想要的数据类型呢？
+Object.prototype.toString。call()
+
+function judgeDataType(arg){
+  var toString = Object.prototype.toString;
+  // arg instanceof Element 为了统一DOM节点类型的输出
+  var dataType = arg instanceof Element ? "element" : toString.call(arg).replace(/\[object\s(.+)\]/, "$1").toLowerCase();
+  
+  return dataType;
+}
