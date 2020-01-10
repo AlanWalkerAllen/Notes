@@ -1,0 +1,31 @@
+undefined常出现的场景：
+  1.声明变量但未赋值      var a;  // undefined
+  2.访问对象身上没有的属性或方法
+      var obj = {
+        name:"admin",
+        pass:"123",
+        show:function(){}
+      }
+      console.log(obj.name)   // admin
+      console.log(obj.age)    // undefined
+      
+  3.函数定义了形参，但是没有传实参
+    function fn(arg1,arg2,arg3){
+      console.log(arg1);   // admin
+      console.log(arg2);   // 123
+      console.log(arg3);   // undefined
+    }
+    fn("admin","123");
+    
+  4.没有返回值的函数
+    var a = function(){
+      consol.log(1)
+    }
+    console.log(a)     // undefined
+    
+null
+  null:空值：表示一个被人为重置的空的对象，在内存中表示栈中的变量没有指向堆中的内存对象
+  
+diff:
+  undefined表示一个变量自然的，最原始的状态值
+  而null表示一个变量被人为的设置为空对象，而不是原始状态
