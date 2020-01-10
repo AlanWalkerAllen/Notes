@@ -1,0 +1,22 @@
+    <div onclick="clickFunc(event)" style="text-align: center;margin:15px;border:1px solid red;border-radius:3px;">
+        <div style="margin: 25px; border:1px solid royalblue;border-radius:3px;">
+            <div style="margin:25px;border:1px solid skyblue;border-radius:3px;">
+                <button style="margin:10px">Button</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    function clickFunc(event) {
+        // 虽然事件附加给了最外层div，但是event.target永远打印的是触发事件的元素
+        console.log(event.target);    // 事件触发的元素
+        
+        // event.currentTarget永远是显示附加事件的元素
+        console.log(event.currentTarget);  // 显示附加事件的元素
+    }
+    
+    
+    2.如何在判断事件中是否已经使用了event.preventDefault();
+      在事件处理函数中，使用event.defaultPrevented,返回一个bool值
+    
+    
