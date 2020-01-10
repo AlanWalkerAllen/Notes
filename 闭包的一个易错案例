@@ -1,0 +1,32 @@
+    const arrFuncs = [];
+    for(var i = 0; i < 5; i++){
+        arrFuncs.push(function () {
+            return i;
+        })
+    }
+    console.log(i);    // 5
+    for (let i = 0; i < arrFuncs.length; i++) {
+        console.log(arrFuncs[i]());   // 5个5
+    }
+    
+    解析：第一个for循环中的i是用var定义的，由于var声明的存在变量的提升，所以，此时声明的i是一个全局变量，
+         arrFuncs的push方法插入的是一个未被立即执行的函数，这个函数是在将来会被执行，那个时候for循环早就
+         已经结束，i的值也已经变成了5，所以，arrFuncs中的数据实际上已经变成下面这样的
+         arrFuncs = [function(){return 5;},function(){return 5;},function(){return 5;},function(){return 5;},function(){return 5;}]
+         
+         所以，在第二个for循环中，用let定义的i是起迷惑作用的，不管i循环到几，arrFuncs中的数据已经确定了，
+         所以，我们console的结果是 5个5
+         
+    解决办法：1.使用let关键字的块级作用域，在第一个for循环中用let定义i
+                 for(let i = 0; i < 5; i++){
+                    arrFuncs.push(function () {
+                      return i;
+                    })
+                 }
+            
+             2.arrFuncs.push操作是插入的一个未被执行的函数，那么，我们就是用匿名函数包裹这个函数，让他立即执行，即可
+                  for(var i = 0; i < 5; i++){
+                      arrFuncs.push((function (k) {
+                          return k;
+                      })(i))
+                  }
