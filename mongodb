@@ -1,0 +1,35 @@
+module.exports = {
+  insert(collectionName,data){
+    return new Prominse((reject,resolve)=>{
+      collectionName.insertMany(data,(err)=>{
+        err ? reject(err) : resolve();
+      })
+    })
+  },
+  update(collectionName,where,newData,type=1){
+    type = type === 1 ? "updateOne" : "updateMany";
+    return new Promise((resolve,reject)=>{
+      collectionName[type](where,newData,(err)=>{
+        err ? reject(err) : resolve();
+      })
+    })
+  },
+  delete(collectionName,where,type=1){
+    type = type === 1 ? "deleteOne" : "deleteMany";
+    return new Promise((resolve,reject)=>{
+      collectionName[type](where,(err)=>{
+        err ? reject(err) : resolve();
+      })
+    })
+  },
+  find(collectionName,where,col,opt){
+    return new Promise((resolve,reject)=>{
+      const msg = collectionName.find(where,col,(err,data)=>{
+        err ? reject(err) : resolve(data);
+      })
+      if(opt.sort === "object") msg.sort(opt.sort);
+      if(opt.limit === "object") msg.limit(opt.limit);
+      if(opt.skip === "object) msg.skip(opt.skip);
+    })
+  }
+}
