@@ -28,8 +28,8 @@ module.exports = {
         err ? reject(err) : resolve(data);
       })
       if(opt.sort === "object") msg.sort(opt.sort);
-      if(opt.limit === "object") msg.limit(opt.limit);
-      if(opt.skip === "object) msg.skip(opt.skip);
+      if(opt.limit === "number") msg.limit(opt.limit);
+      if(opt.skip === "number) msg.skip(opt.skip);
     })
   }
 }
