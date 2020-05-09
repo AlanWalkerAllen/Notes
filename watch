@@ -1,0 +1,27 @@
+vue中的watch侦听器，当数据发生改变时，触发某些行为
+
+1.最基本的用法
+watch:{
+   name:{
+     handler(new,old){}
+}
+
+2.immediate  true/false
+设置为true时，表示在watch中声明的时候就会去执行handler，等于是基本的watch,设置成false，则是当数据发生改变时去执行handler
+watch:{
+  name:{
+    handler(new,old){},
+    immediate:true
+  }
+}
+
+3.deep  true/false
+基本的watch用法监听不到对象内部属性的改变，只有data中的数据才能监听到变化，如果要对一个对象实现监听，就需要用到deep，deep为true，会给对象中的每个属性
+都加上一个监听器，但是这种做法会严重影响性能，因为并不是所有属性改变都需要执行handler，如果只需要监听其中某个属性改变，可以使用如下：
+watch:{
+  'name.xxx':{
+    handler(new,old){},
+    immediate:true,
+    deep:true
+  }
+}
